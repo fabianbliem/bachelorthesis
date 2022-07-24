@@ -18,22 +18,165 @@ The structure of the template fits many theses works. Seminar papers often requi
 
 Outline the research field and lead towards your research question. How is the investigated issue resolved in related work? What are limitations of these solutions? What is your contribution to find a solution?
 
+The purpose of the research is to study the development of the concept of actorness in the literature and apply it to the European Union by studying and comparing the actorness of the last in the spheres of energy and environment
+
+The structure of the thesis goes as follows: the literature review elaborates on the main definition of the research, namely actorness, its characteristics, as well as the actorness of the EU in the energy and environmental sphere. Chapter I reveals the development of the EU energy policy as a shared competence, adds clearness to the concept of actorness in the present context, and discusses the basic European and international legislation and the changes brought by it. Chapter II examines the history of the environmental policy of the EU and reveals the Union’s actorness in this regard. The conclusion of the thesis compares the EU actorness in the energy and environmental sphere and tries to predict the further developments and the challenges of the issue in question.
+
 \section{Background}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus lacinia sagittis. Maecenas vestibulum ex quam, eget placerat mi pharetra ut. Cras molestie lectus eget efficitur sagittis. Ut porttitor lobortis odio, eget commodo velit consectetur vitae. Quisque ornare auctor neque eleifend bibendum. Praesent molestie efficitur pulvinar. Nullam lobortis lacus sit amet mi tempor, sed suscipit dolor euismod. Pellentesque eget orci eget risus pharetra sodales sed vel nunc. Praesent consequat urna eu libero vestibulum porttitor.
+
 
 \section{Related Work}
 Introduce why this specific related work is important for your own work. Which areas do you cover and why? What do you take as inspiration and what do you do differently/improve upon? 
 
+\autocite[]{Sevtsuk2021}
+  
+
 \section{Method}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus lacinia sagittis. Maecenas vestibulum ex quam, eget placerat mi pharetra ut. Cras molestie lectus eget efficitur sagittis. Ut porttitor lobortis odio, eget commodo velit consectetur vitae. Quisque ornare auctor neque eleifend bibendum. Praesent molestie efficitur pulvinar. Nullam lobortis lacus sit amet mi tempor, sed suscipit dolor euismod. Pellentesque eget orci eget risus pharetra sodales sed vel nunc. Praesent consequat urna eu libero vestibulum porttitor.
+
+To be able to measure a possible increase in satisfaction of the route proposal a qualitative trail run will be conducted. In this trail run a standard route will be compared to the newly proposed route and measured by using two surveys. Survey number one is using a quantitative approach to find out the subjects general travel behavior while survey number two is there to compare and measure the satisfaction with a quantitative approach after conducting the trail run.
+
+Finding out about the subjects travel behavior should give a better understanding of the results from the route proposal satisfaction survey. Furthermore it is going to give a relation to the subjects travel behavior and the increase or decrease in satisfaction.
+
+Qualitative Surveys.
+
+Proposing said alternative route will be done by using the influence of historical pedestrian traffic to calculate a route with less interactions for the traveler to get to the same goal. This is going to be done by analysing historical GPS trajectories and using a customized routing engine proposing the route for the trail run.   through a GPS trace analysis and   
+
+
+
+In present work, various research methods have been applied. They include a descriptive method (outlining different approaches to the term “actorness” and identifying the ways of measuring it), a historical method (following the historical development of the shared energy and environmental policies in the EU and their adaptation to the realities of the modern world), a comparative method (e.g., conferring the definitions of actorness and the level of actorness of the EU in energy and environmental spheres), statistical and quantitative (e.g., providing statistical data on the ecological goals and sustainable development, import of energy resources), analytical (e.g., assuming how the public opinion on the ecological situation contributes to the changing of the adopted energy policies), and process tracing method (e.g., identifying the causal mechanisms that link opportunity, presence, capability, performance, and effect, i.e., EU actorness).
+
+
+Using the influence of traffic to propose an alternative route 
+
+To be able to measure a possible increase in satisfaction of the route proposal a qualitative trail run of both routes will be conducted.
+
+Therefore a route for the proposal to be compared to has to be found.
+
+
+
 
 \section{System Overview}
-Provide a high level overview of your system, approach, etc. 
-Describe features, user interfaces, provide screenshots.
-What does a user do with your application/system/interaction method?
 
-\section{Implementation}
+
+
+
+
+\section{Data Analysis}
+
+To be able to create the historical pedestrian traffic / walking patterns a solid Data-set is needed so the routing engine can be configured to be adapted to the influence of the walking patterns. 
+
+Searching for a Data-set that is viable for further analysis was not an easy task. There is no data available publicly from the city itself neither any local research institutions was we have contacted during the research period had such data available. Therefore the OSM (OpenStreetMap) Project and its Database of public traces came in handy to be extracted, verified, classified and then used to create a historical pedestrian traffic pattern for the part of the city that was used to create the alternative route.
+
+The OSM Database of public traces consists of over 11 billion uploaded GPS points around the globe. \footnote{\url{https://planet.openstreetmap.org/statistics/data_stats.html}}
+
+As the studies focus is the City of Salzburg an appropriate bounding box covering the inner city and most of its close to be districts was selected. 
+
+The reason for overlapping also with towns and places around Salzburg is the OSM Editing API. We wanted to get as much traces as possible leading into the city so a more accurate estimation of pedestrian traffic is made possible. As the API is only taking routes that lead through the bounding box given a bigger sample area than necessary for the route proposal was taken in account. The box taken is seen in Figure \ref{figure:BoundingBox}.
+
+%figure* stretches figure over both columns
+\begin{figure*}[t]
+ 	\centering
+ 	\includegraphics[width=0.9\textwidth]{images/BoundingBoxOSM.png}
+ 	\caption{
+ 		Bounding Box for extracted GPS trajectories.
+ 	}
+ 	%for reference to this figure
+ 	\label{figure:BoundingBox}
+\end{figure*}
+
+\subsection{Data-set Overview}
+
+Given the bounding box of Salzburg and its surroundings 1.173.334 Data-points were extracted using the OSM Editing API. \footnote{\url{https://wiki.openstreetmap.org/wiki/API_v0.6#GPS_traces}}
+
+The OSM Editing API is a collection of APIs based on RESTful API principles. There are API calls to create, read, update, and delete the three fundamental elements that make up OpenStreetMap's map data. They each return or expect the data for the elements in a XML format.
+\autocite[]{wiki:xxx}
+
+The Data-points are returned in a XML format using the GPX standard. \footnote{\url{https://www.topografix.com/GPX/1/1/#type_trksegType}} Important to mention is, that for privacy reasons all waypoints of non-trackable traces are randomized and delivered as one trackSegment. This happens in violation of the GPX standard. 
+
+Get GPS Points: Get /api/0.6/trackpoints?bbox=left,bottom,right,top&page=pageNumber
+
+
+Use this to retrieve the GPS track points that are inside a given bounding box (formatted in a GPX format).
+
+where:
+
+left, bottom, right, and top are used the same way as they are in the command to retrieve nodes, ways, and relations.
+
+pageNumber specifies which group of 5,000 points, or page, to return. Since the command does not return more than 5,000 points at a time, this parameter must be incremented—and the command sent again (using the same bounding box)—in order to retrieve all of the points for a bounding box that contains more than 5,000 points. When this parameter is 0 (zero), the command returns the first 5,000 points; when it is 1, the command returns points 5,001–10,000, etc.
+
+
+\subsection{Data Extraction}
+
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.0" creator="OpenStreetMap.org" xmlns="http://www.topografix.com/GPX/1/0">
+    <trk>
+        <name>osmtrack_KUnrl0ZaKm.gpx</name>
+        <desc>desc.</desc>
+        <url>/user/exbrick/traces/3444105</url>
+        <trkseg>
+            <trkpt lat="47.8318200" lon="13.0567170">
+                <time>2006-08-22T01:37:05Z</time>
+            </trkpt>
+            <trkpt lat="47.8325810" lon="13.0567800">
+                <time>2006-08-22T01:37:20Z</time>
+            </trkpt>
+            <trkpt lat="47.8331180" lon="13.0569120">
+                <time>2006-08-22T01:37:30Z</time>
+            </trkpt>
+            
+\end{lstlisting}
+
+
+
+
+\section{Model & Implementation}
 Provide implementation details such as the used software and our software architecture, highlight your own solutions to encountered difficulties. Describe relevant iterations of your implementation.
+
+Providing a route proposal starts further than analyzing geo-located trajectories. Precautious steps were needed in building the architecture to understand the data used for the newly suggested route. 
+
+Therefore a Map Application was created to visualize the extracted and classified data, the routes used for the comparison, and the new suggested routes from the utilized routing engine. Said Map Application is a standalone React App using the Mapbox Plattform for map creation and route visualization. \footnote{\url{https://www.mapbox.com/}} For working with React, Mapbox provides mapbox-gl-js, a javascript library that uses WebGL to render interactive maps from vector tiles and Mapbox styles. \footnote{\url{https://docs.mapbox.com/mapbox-gl-js/guides/}}
+
+For the map and route visualization to interact with the extracted geo trajectory data, a NodeJS backend was developed. The backend interacts with the OSM API and the established Geo-Database, handling the trajectories extraction, classification, and transformation.
+
+With its geospatial data support, MongoDB was selected as the Geo-Database and stores the extracted Data-Set and the further classified data objects. Even though PostGIS \footnote{\url{http://postgis.net/}} is more mature and built on the Open Geospatial Consortium (OGC) standards, the uncertainty of incomplete data sets from the OSM project led to the decision to use the document-based solution.
+
+To work with the OSM project and its map data, the JOSM (Java OpenStreetMap editor) was used to interact with the map layer as the basis for the route proposal. \footnote{\url{https://josm.openstreetmap.de/}}
+
+
+% https://wiki.openstreetmap.org/wiki/Bounding_Box
+
+Data Extraction
+
+% https://www.topografix.com/GPX/1/1/#type_trksegType
+
+Data Conversion
+
+% https://github.com/mapbox/togeojson
+
+Database
+
+Working with Geodata there is 
+
+MongoDB & Mongoose
+
+
+
+Data Prepocessing
+
+TurfJS
+
+Routing Engine
+
+nominatim
+
+osrm
+
+Mapbox API
+
+\section{}
 
 \section{Evaluation}
 Describe your methodology. How did you evaluate your work? Why did you choose this methodology? Present results of your evaluation here.
